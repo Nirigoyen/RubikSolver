@@ -7,9 +7,9 @@ def rotateCube(cube, direction): # 1 = derecha, 2 = izquierda, 3 = arriba, 4 = a
     elif direction == 2:
         cube.front, cube.right, cube.left, cube.back = cube.right, cube.left, cube.back, cube.front
     elif direction == 3:
-        cube.front, cube.top, cube.left, cube.botton = cube.botton, cube.front, cube.top, cube.left
+        cube.front, cube.top, cube.left, cube.bottom = cube.bottom, cube.front, cube.top, cube.left
     elif direction == 4:
-        cube.front, cube.top, cube.left, cube.botton = cube.top, cube.left, cube.botton, cube.front
+        cube.front, cube.top, cube.left, cube.bottom = cube.top, cube.left, cube.bottom, cube.front
 
 
 def rotateRow(cube, row, direction): # 1 = derecha, 2 = izquierda
@@ -26,9 +26,9 @@ def rotateCol(cube, col, direction): # 3 = arriba, 4 = abajo
     rotateCube(cube, 2)
 
     if direction == 3:
-        cube.front[col], cube.top[col], cube.left[col], cube.botton[col] = cube.botton[col], cube.front[col], cube.top[col], cube.left[col]
+        cube.front[col], cube.top[col], cube.left[col], cube.bottom[col] = cube.bottom[col], cube.front[col], cube.top[col], cube.left[col]
     elif direction == 4:
-        cube.front[col], cube.top[col], cube.left[col], cube.botton[col] = cube.top[col], cube.left[col], cube.botton[col], cube.front[col]
+        cube.front[col], cube.top[col], cube.left[col], cube.bottom[col] = cube.top[col], cube.left[col], cube.bottom[col], cube.front[col]
 
     rotateCube(cube, 1)
     rotateCube(cube, 4)
@@ -57,7 +57,7 @@ if __name__ == '__main__':
                  [5, 5, 5],
                  [5, 5, 5]]
 
-        botton =[[6, 6, 6],
+        bottom =[[6, 6, 6],
                  [6, 6, 6],
                  [6, 6, 6]]
 
