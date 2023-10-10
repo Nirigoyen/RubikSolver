@@ -1,4 +1,4 @@
-
+import random
 
 
 def rotateCube(cube, direction): # 1 = derecha, 2 = izquierda, 3 = arriba, 4 = abajo
@@ -64,22 +64,12 @@ if __name__ == '__main__':
     print("cara 1")
     printFace(cube.front)
 
-    # print()
-    # print("cara 2")
-    # printFace(cube.right)
-
     rotateCol(cube, 2, 3)
 
     print("cara 1")
     printFace(cube.front)
 
-    # print()
-    # print("cara 1")
-    # printFace(cube.front)
 
-    # print()
-    # print("cara 2")
-    # printFace(cube.right)
 
 
 
