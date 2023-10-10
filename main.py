@@ -14,25 +14,24 @@ def rotateCube(cube, direction): # 1 = derecha, 2 = izquierda, 3 = arriba, 4 = a
 
 def rotateRow(cube, row, direction): # 1 = derecha, 2 = izquierda
     if direction == 1:
-        cube.front[row], cube.right[row], cube.left[row], cube.back[row] = cube.back[row], cube.front[row], cube.right[row], cube.left[row]
+        cube.front[row-1], cube.right[row-1], cube.left[row-1], cube.back[row-1] = cube.back[row-1], cube.front[row-1], cube.right[row-1], cube.left[row-1]
     elif direction == 2:
-        cube.front[row], cube.right[row], cube.left[row], cube.back[row] = cube.right[row], cube.left[row], cube.back[row], cube.front[row]
+        cube.front[row-1], cube.right[row-1], cube.left[row-1], cube.back[row-1] = cube.right[row-1], cube.left[row-1], cube.back[row-1], cube.front[row-1]
 
 
 def rotateCol(cube, col, direction): # 3 = arriba, 4 = abajo
+    for i in range(3):
+        if direction == 3:
+            cube.front[i][col - 1], cube.top[i][col - 1], cube.left[i][col - 1], cube.bottom[i][col - 1] = cube.bottom[i][col - 1], cube.front[i][col - 1], cube.top[i][col - 1], cube.left[i][col - 1]
+        elif direction == 4:
+            cube.front[i][col - 1], cube.top[i][col - 1], cube.left[i][col - 1], cube.bottom[i][col - 1] = cube.top[i][col - 1], cube.left[i][col - 1], cube.bottom[i][col - 1], cube.front[i][col - 1]
 
-    rotateCube(cube, 1)
-    rotateCube(cube, 3)
-    rotateCube(cube, 2)
 
-    if direction == 3:
-        cube.front[col], cube.top[col], cube.left[col], cube.bottom[col] = cube.bottom[col], cube.front[col], cube.top[col], cube.left[col]
-    elif direction == 4:
-        cube.front[col], cube.top[col], cube.left[col], cube.bottom[col] = cube.top[col], cube.left[col], cube.bottom[col], cube.front[col]
+def printFace(face):
+    print()
+    for i in range (len(face[0])):
+        print (face[i])
 
-    rotateCube(cube, 1)
-    rotateCube(cube, 4)
-    rotateCube(cube, 2)
 
 
 if __name__ == '__main__':
@@ -61,13 +60,28 @@ if __name__ == '__main__':
                  [6, 6, 6],
                  [6, 6, 6]]
 
-        print("cara 1", front)
-        print("cara 2", right)
+
+    print("cara 1")
+    printFace(cube.front)
+
+    # print()
+    # print("cara 2")
+    # printFace(cube.right)
+
+    rotateCol(cube, 2, 3)
+
+    print("cara 1")
+    printFace(cube.front)
+
+    # print()
+    # print("cara 1")
+    # printFace(cube.front)
+
+    # print()
+    # print("cara 2")
+    # printFace(cube.right)
 
 
-
-        print("cara 1", front)
-        print("cara 2", right)
 
 
 
