@@ -12,7 +12,9 @@ def rotateCube(cube, direction): # 1 = derecha, 2 = izquierda, 3 = arriba, 4 = a
     elif direction == 4:
         cube.front, cube.top, cube.left, cube.bottom = cube.top, cube.left, cube.bottom, cube.front
 
-#def rotateFace:
+def rotateFace(face):
+
+
 
 
 def rotateRow(cube, row, direction): # 1 = derecha, 2 = izquierda
