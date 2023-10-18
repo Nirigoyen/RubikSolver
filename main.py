@@ -4,31 +4,55 @@ import random
 # ROTACIONES
 def rotateCube(cube, direction): # 1 = derecha, 2 = izquierda, 3 = arriba, 4 = abajo
     if direction == 1:
-        cube.front, cube.right, cube.left, cube.back = cube.back, cube.front, cube.right, cube.left
+        cube.front, cube.right, cube.back, cube.left = cube.right, cube.back, cube.left, cube.front
     elif direction == 2:
-        cube.front, cube.right, cube.left, cube.back = cube.right, cube.left, cube.back, cube.front
+        cube.front, cube.right, cube.back, cube.left = cube.left, cube.front, cube.left, cube.back
     elif direction == 3:
-        cube.front, cube.top, cube.left, cube.bottom = cube.bottom, cube.front, cube.top, cube.left
+        cube.front, cube.top, cube.back, cube.bottom = cube.top, cube.back, cube.bottom, cube.front
     elif direction == 4:
-        cube.front, cube.top, cube.left, cube.bottom = cube.top, cube.left, cube.bottom, cube.front
+        cube.front, cube.top, cube.back, cube.bottom = cube.bottom, cube.front, cube.top, cube.back
 
-def rotateFace(face):
+def rotateFace(face, direction):
+    rows = len(face)
+    cols = len(face[0])
 
-
+    if direction == 1 or direction == 3:
+        #face = [[face[cols - 1 - j][i] for j in range(rows)] for i in range(cols)]
+        rotated_matrix = [[0] * rows for _ in range(cols)]
+        for i in range(rows):
+            for j in range(cols):
+                rotated_matrix[j][rows - 1 - i] = face[i][j]
+    else:
+        #face = [[face[j][rows - 1 - i] for j in range(rows)] for i in range(cols)]
+        rotated_matrix = [[0] * rows for _ in range(cols)]
+        for i in range(rows):
+            for j in range(cols):
+                rotated_matrix[cols - 1 - j][i] = face[i][j]
 
 
 def rotateRow(cube, row, direction): # 1 = derecha, 2 = izquierda
+
     if direction == 1:
-        cube.front[row-1], cube.right[row-1], cube.left[row-1], cube.back[row-1] = cube.back[row-1], cube.front[row-1], cube.right[row-1], cube.left[row-1]
+        cube.front[row-1], cube.right[row-1],cube.back[row-1], cube.left[row-1]  = cube.left[row-1],cube.front[row-1], cube.right[row-1], cube.back[row-1]
     elif direction == 2:
-        cube.front[row-1], cube.right[row-1], cube.left[row-1], cube.back[row-1] = cube.right[row-1], cube.left[row-1], cube.back[row-1], cube.front[row-1]
+        cube.front[row-1], cube.right[row-1], cube.back[row-1], cube.left[row-1]  = cube.right[row-1], cube.back[row-1], cube.left[row-1], cube.front[row-1]
+
+    if row - 1 == 0:
+        rotateFace(cube.top, direction)
+    elif row - 1 == 2:
+        rotateFace(cube.bottom, direction)
 
 def rotateCol(cube, col, direction): # 3 = arriba, 4 = abajo
     for i in range(3):
         if direction == 3:
-            cube.front[i][col - 1], cube.top[i][col - 1], cube.left[i][col - 1], cube.bottom[i][col - 1] = cube.bottom[i][col - 1], cube.front[i][col - 1], cube.top[i][col - 1], cube.left[i][col - 1]
+            cube.front[i][col - 1], cube.top[i][col - 1], cube.back[i][col - 1], cube.bottom[i][col - 1] = cube.bottom[i][col - 1], cube.front[i][col - 1], cube.top[i][col - 1], cube.back[i][col - 1]
         elif direction == 4:
-            cube.front[i][col - 1], cube.top[i][col - 1], cube.left[i][col - 1], cube.bottom[i][col - 1] = cube.top[i][col - 1], cube.left[i][col - 1], cube.bottom[i][col - 1], cube.front[i][col - 1]
+            cube.front[i][col - 1], cube.top[i][col - 1], cube.back[i][col - 1], cube.bottom[i][col - 1] = cube.top[i][col - 1], cube.back[i][col - 1], cube.bottom[i][col - 1], cube.front[i][col - 1]
+
+    if col - 1 == 0:
+        rotateFace(cube.left, direction)
+    elif col - 1 == 2:
+        rotateFace(cube.right, direction)
 
 def scramble(cube):
     for i in range(random.randint(10, 30)):
@@ -120,11 +144,17 @@ if __name__ == '__main__':
 
     printCube(cube)
 
-    rotateCol(cube, 1, 3)
+
+    rotateRow(cube, 1, 1)
+
+    rotateCol(cube, 3, 3)
+
 
     printCube(cube)
 
     #FALTA HACER QUE CUANDO SE ROTE UNA FILA O COLUMNA QUE SEA DEL BORDE, SE GIRE LA CARA TAMBIEN
+
+
 
 
 
